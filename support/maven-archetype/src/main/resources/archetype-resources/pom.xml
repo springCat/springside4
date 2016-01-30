@@ -5,7 +5,7 @@
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
 	<packaging>war</packaging>
-	<name>Springside :: Example :: QuickStart</name>
+	<name>SpringCat :: Example :: QuickStart</name>
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
@@ -35,14 +35,15 @@
 		<java.version>1.6</java.version>
 	
 		<!-- 项目属性 -->
+		<!--
 		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
-		<!--
+		-->
 			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 			<jdbc.driver.version>5.1.22</jdbc.driver.version>
-		-->	
+
 	</properties>
 
 	<prerequisites>
@@ -577,8 +578,8 @@
 								<property file="src/main/resources/application.properties" />
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue" encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
-									<transaction src="src/main/resources/sql/h2/schema.sql" />
-									<transaction src="src/test/resources/data/h2/import-data.sql" />
+									<transaction src="src/main/resources/sql/mysql/schema.sql" />
+									<transaction src="src/test/resources/data/mysql/import-data.sql" />
 								</sql>
 							</target>
 						</configuration>

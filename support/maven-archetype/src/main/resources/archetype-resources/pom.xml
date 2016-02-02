@@ -521,6 +521,20 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.7</version>
 			</plugin>
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<driver>com.mysql.jdbc.Driver</driver>
+					<url><![CDATA[jdbc:mysql://localhost/${artifactId}?useUnicode=true&characterEncoding=utf-8]]></url>
+					<user>root</user>
+					<password>260126012601</password>
+					<validateOnMigrate>true</validateOnMigrate>
+					<baselineOnMigrate>true</baselineOnMigrate>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

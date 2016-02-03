@@ -4,6 +4,6 @@ echo "[INFO] Re-create the schema and provision the sample data."
 
 cd ..
 
-mvn antrun:run -Prefresh-db
+call mvn compile flyway:migrate
 
 cd bin

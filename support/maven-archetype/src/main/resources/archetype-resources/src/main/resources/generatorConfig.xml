@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <classPathEntry
+            location="src/test/resources/generator/driver/mysql-connector-java-5.1.38.jar" />
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+
+        <property name="suppressTypeWarnings" value="true" />
+
+        <!--<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">-->
+            <!--<property name="searchString" value="Example$"/>-->
+            <!--<property name="replaceString" value="Condition"/>-->
+        <!--</plugin>-->
+
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/${artifactId}?useUnicode=true" userId="root" password="260126012601">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+            <property name="" value=""/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="${package}.entity" targetProject="src/main/java" >
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="rootClasss" value="${package}.entity.IdEntity"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${package}.repository.mybatis" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--<table tableName="u_user" domainObjectName="PostGreUser">-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+            <!--<columnOverride column="id" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="tid" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="uid" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="brand_id" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="hairdye_id" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="hairdye_colour_id" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="address_id" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="coupon_id" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="state"-->
+                            <!--javaType="com.springcat.deer.model.order.OrderState"-->
+                            <!--jdbcType="INTEGER"-->
+                            <!--typeHandler="com.springcat.deer.model.order.OrderStateEnumHandler" />-->
+            <!--<columnOverride column="pay_type"-->
+                            <!--javaType="com.springcat.deer.model.order.PayType"-->
+                            <!--jdbcType="INTEGER"-->
+                            <!--typeHandler="com.springcat.deer.model.order.PayTypeEnumHandler" />-->
+        <!--</table>-->
+
+        <!--`id` bigint(20) NOT NULL AUTO_INCREMENT,-->
+        <!--`login_name` varchar(64) COLLATE utf8_bin NOT NULL,-->
+        <!--`name` varchar(64) COLLATE utf8_bin NOT NULL,-->
+        <!--`password` varchar(255) COLLATE utf8_bin NOT NULL,-->
+        <!--`salt` varchar(64) COLLATE utf8_bin NOT NULL,-->
+        <!--`roles` varchar(255) COLLATE utf8_bin NOT NULL,-->
+        <!--`register_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',-->
+
+        <!--<table tableName="tuser" domainObjectName="TUser">-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+            <!--<columnOverride column="id" javaType="java.lang.Long" jdbcType="INTEGER" />-->
+            <!--<columnOverride column="login_name" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+            <!--<columnOverride column="name" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+            <!--<columnOverride column="password" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+            <!--<columnOverride column="salt" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+            <!--<columnOverride column="roles" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+            <!--<columnOverride column="register_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+        <!--</table>-->
+
+        <table tableName="tuser" domainObjectName="TUser">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+            <!--<columnOverride column="id"/>-->
+            <!--<columnOverride column="login_name" />-->
+            <!--<columnOverride column="name"  />-->
+            <!--<columnOverride column="password" />-->
+            <!--<columnOverride column="salt" />-->
+            <!--<columnOverride column="roles"/>-->
+            <!--<columnOverride column="register_date" />-->
+
+            <ignoreColumn column="roles"/>
+            <ignoreColumn column="salt"/>
+
+        </table>
+
+    </context>
+
+
+</generatorConfiguration>

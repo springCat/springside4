@@ -18,18 +18,18 @@
             <foreach collection="criteria.criteria" item="criterion" >
               <choose >
                 <when test="criterion.noValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                 </when>
                 <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value}
                 </when>
                 <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value} and ${symbol_pound}{criterion.secondValue}
                 </when>
                 <when test="criterion.listValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                   <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
+                    ${symbol_pound}{listItem}
                   </foreach>
                 </when>
               </choose>
@@ -47,18 +47,18 @@
             <foreach collection="criteria.criteria" item="criterion" >
               <choose >
                 <when test="criterion.noValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                 </when>
                 <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value}
                 </when>
                 <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value} and ${symbol_pound}{criterion.secondValue}
                 </when>
                 <when test="criterion.listValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                   <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
+                    ${symbol_pound}{listItem}
                   </foreach>
                 </when>
               </choose>
@@ -82,18 +82,18 @@
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null" >
-      order by ${orderByClause}
+      order by ${symbol_dollar}{orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from tuser
-    where id = #{id,jdbcType=BIGINT}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tuser
-    where id = #{id,jdbcType=BIGINT}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="org.springcat.sample.entity.UserCondition" >
     delete from tuser
@@ -105,11 +105,11 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tuser (login_name, name, password, 
+    insert into tuser (login_name, name, password,
       salt, roles, register_date
       )
-    values (#{loginName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, #{registerDate,jdbcType=TIMESTAMP}
+    values (${symbol_pound}{loginName,jdbcType=VARCHAR}, ${symbol_pound}{name,jdbcType=VARCHAR}, ${symbol_pound}{password,jdbcType=VARCHAR},
+      ${symbol_pound}{salt,jdbcType=VARCHAR}, ${symbol_pound}{roles,jdbcType=VARCHAR}, ${symbol_pound}{registerDate,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.springcat.sample.entity.User" >
@@ -139,22 +139,22 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="loginName != null" >
-        #{loginName,jdbcType=VARCHAR},
+        ${symbol_pound}{loginName,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+        ${symbol_pound}{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+        ${symbol_pound}{password,jdbcType=VARCHAR},
       </if>
       <if test="salt != null" >
-        #{salt,jdbcType=VARCHAR},
+        ${symbol_pound}{salt,jdbcType=VARCHAR},
       </if>
       <if test="roles != null" >
-        #{roles,jdbcType=VARCHAR},
+        ${symbol_pound}{roles,jdbcType=VARCHAR},
       </if>
       <if test="registerDate != null" >
-        #{registerDate,jdbcType=TIMESTAMP},
+        ${symbol_pound}{registerDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -168,25 +168,25 @@
     update tuser
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
+        id = ${symbol_pound}{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.loginName != null" >
-        login_name = #{record.loginName,jdbcType=VARCHAR},
+        login_name = ${symbol_pound}{record.loginName,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+        name = ${symbol_pound}{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
+        password = ${symbol_pound}{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.salt != null" >
-        salt = #{record.salt,jdbcType=VARCHAR},
+        salt = ${symbol_pound}{record.salt,jdbcType=VARCHAR},
       </if>
       <if test="record.roles != null" >
-        roles = #{record.roles,jdbcType=VARCHAR},
+        roles = ${symbol_pound}{record.roles,jdbcType=VARCHAR},
       </if>
       <if test="record.registerDate != null" >
-        register_date = #{record.registerDate,jdbcType=TIMESTAMP},
+        register_date = ${symbol_pound}{record.registerDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -195,13 +195,13 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update tuser
-    set id = #{record.id,jdbcType=BIGINT},
-      login_name = #{record.loginName,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR},
-      roles = #{record.roles,jdbcType=VARCHAR},
-      register_date = #{record.registerDate,jdbcType=TIMESTAMP}
+    set id = ${symbol_pound}{record.id,jdbcType=BIGINT},
+      login_name = ${symbol_pound}{record.loginName,jdbcType=VARCHAR},
+      name = ${symbol_pound}{record.name,jdbcType=VARCHAR},
+      password = ${symbol_pound}{record.password,jdbcType=VARCHAR},
+      salt = ${symbol_pound}{record.salt,jdbcType=VARCHAR},
+      roles = ${symbol_pound}{record.roles,jdbcType=VARCHAR},
+      register_date = ${symbol_pound}{record.registerDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,35 +210,35 @@
     update tuser
     <set >
       <if test="loginName != null" >
-        login_name = #{loginName,jdbcType=VARCHAR},
+        login_name = ${symbol_pound}{loginName,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+        name = ${symbol_pound}{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+        password = ${symbol_pound}{password,jdbcType=VARCHAR},
       </if>
       <if test="salt != null" >
-        salt = #{salt,jdbcType=VARCHAR},
+        salt = ${symbol_pound}{salt,jdbcType=VARCHAR},
       </if>
       <if test="roles != null" >
-        roles = #{roles,jdbcType=VARCHAR},
+        roles = ${symbol_pound}{roles,jdbcType=VARCHAR},
       </if>
       <if test="registerDate != null" >
-        register_date = #{registerDate,jdbcType=TIMESTAMP},
+        register_date = ${symbol_pound}{registerDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.springcat.sample.entity.User" >
     update tuser
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      roles = #{roles,jdbcType=VARCHAR},
-      register_date = #{registerDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    set login_name = ${symbol_pound}{loginName,jdbcType=VARCHAR},
+      name = ${symbol_pound}{name,jdbcType=VARCHAR},
+      password = ${symbol_pound}{password,jdbcType=VARCHAR},
+      salt = ${symbol_pound}{salt,jdbcType=VARCHAR},
+      roles = ${symbol_pound}{roles,jdbcType=VARCHAR},
+      register_date = ${symbol_pound}{registerDate,jdbcType=TIMESTAMP}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.UserCondition" id="selectByExampleWithRowbounds" >
     select
@@ -251,7 +251,7 @@
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null" >
-      order by ${orderByClause}
+      order by ${symbol_dollar}{orderByClause}
     </if>
   </select>
 </mapper>

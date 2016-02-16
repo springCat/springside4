@@ -1,4 +1,7 @@
-package org.springcat.sample.entity;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.entity;
 
 import java.util.ArrayList;
 import java.util.List;

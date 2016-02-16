@@ -15,18 +15,18 @@
             <foreach collection="criteria.criteria" item="criterion" >
               <choose >
                 <when test="criterion.noValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                 </when>
                 <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value}
                 </when>
                 <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value} and ${symbol_pound}{criterion.secondValue}
                 </when>
                 <when test="criterion.listValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                   <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
+                    ${symbol_pound}{listItem}
                   </foreach>
                 </when>
               </choose>
@@ -44,18 +44,18 @@
             <foreach collection="criteria.criteria" item="criterion" >
               <choose >
                 <when test="criterion.noValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                 </when>
                 <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value}
                 </when>
                 <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  and ${symbol_dollar}{criterion.condition} ${symbol_pound}{criterion.value} and ${symbol_pound}{criterion.secondValue}
                 </when>
                 <when test="criterion.listValue" >
-                  and ${criterion.condition}
+                  and ${symbol_dollar}{criterion.condition}
                   <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
+                    ${symbol_pound}{listItem}
                   </foreach>
                 </when>
               </choose>
@@ -79,18 +79,18 @@
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null" >
-      order by ${orderByClause}
+      order by ${symbol_dollar}{orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from ttask
-    where id = #{id,jdbcType=BIGINT}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from ttask
-    where id = #{id,jdbcType=BIGINT}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="org.springcat.sample.entity.TaskCondition" >
     delete from ttask
@@ -104,7 +104,7 @@
     </selectKey>
     insert into ttask (title, description, user_id
       )
-    values (#{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}
+    values (${symbol_pound}{title,jdbcType=VARCHAR}, ${symbol_pound}{description,jdbcType=VARCHAR}, ${symbol_pound}{userId,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.springcat.sample.entity.Task" >
@@ -125,13 +125,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
+        ${symbol_pound}{title,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+        ${symbol_pound}{description,jdbcType=VARCHAR},
       </if>
       <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
+        ${symbol_pound}{userId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -145,16 +145,16 @@
     update ttask
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
+        id = ${symbol_pound}{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.title != null" >
-        title = #{record.title,jdbcType=VARCHAR},
+        title = ${symbol_pound}{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
+        description = ${symbol_pound}{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
+        user_id = ${symbol_pound}{record.userId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -163,10 +163,10 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update ttask
-    set id = #{record.id,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=BIGINT}
+    set id = ${symbol_pound}{record.id,jdbcType=BIGINT},
+      title = ${symbol_pound}{record.title,jdbcType=VARCHAR},
+      description = ${symbol_pound}{record.description,jdbcType=VARCHAR},
+      user_id = ${symbol_pound}{record.userId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -175,23 +175,23 @@
     update ttask
     <set >
       <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
+        title = ${symbol_pound}{title,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+        description = ${symbol_pound}{description,jdbcType=VARCHAR},
       </if>
       <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
+        user_id = ${symbol_pound}{userId,jdbcType=BIGINT},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.springcat.sample.entity.Task" >
     update ttask
-    set title = #{title,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
+    set title = ${symbol_pound}{title,jdbcType=VARCHAR},
+      description = ${symbol_pound}{description,jdbcType=VARCHAR},
+      user_id = ${symbol_pound}{userId,jdbcType=BIGINT}
+    where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.TaskCondition" id="selectByExampleWithRowbounds" >
     select
@@ -204,7 +204,7 @@
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null" >
-      order by ${orderByClause}
+      order by ${symbol_dollar}{orderByClause}
     </if>
   </select>
 </mapper>

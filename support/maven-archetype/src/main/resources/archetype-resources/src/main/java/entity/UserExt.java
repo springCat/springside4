@@ -1,4 +1,7 @@
-package org.springcat.sample.entity;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.entity;
 
 /**
  * Created by springcat on 16/2/15.

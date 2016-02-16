@@ -1,16 +1,14 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 /*******************************************************************************
  * Copyright (c) 2005, 2014 springside.github.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package ${package}.web.account;
-
-import javax.validation.Valid;
+package org.springcat.sample.web.account;
 
 import org.apache.shiro.SecurityUtils;
+import org.springcat.sample.entity.UserExt;
+import org.springcat.sample.service.account.AccountService;
+import org.springcat.sample.service.account.ShiroDbRealm.ShiroUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ${package}.entity.User;
-import ${package}.service.account.AccountService;
-import ${package}.service.account.ShiroDbRealm.ShiroUser;
+
+import javax.validation.Valid;
 
 /**
  * 用户修改自己资料的Controller.
@@ -42,7 +39,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("user") User user) {
+	public String update(@Valid @ModelAttribute("user") UserExt user) {
 		accountService.updateUser(user);
 		updateCurrentUserName(user.getName());
 		return "redirect:/";

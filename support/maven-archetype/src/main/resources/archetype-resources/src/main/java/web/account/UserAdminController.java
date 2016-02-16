@@ -1,28 +1,21 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 /*******************************************************************************
  * Copyright (c) 2005, 2014 springside.github.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package ${package}.web.account;
+package org.springcat.sample.web.account;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
+import org.springcat.sample.entity.User;
+import org.springcat.sample.entity.UserExt;
+import org.springcat.sample.service.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ${package}.entity.User;
-import ${package}.service.account.AccountService;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 管理员管理用户的Controller.
@@ -51,7 +44,7 @@ public class UserAdminController {
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
+	public String update(@Valid @ModelAttribute("user") UserExt user, RedirectAttributes redirectAttributes) {
 		accountService.updateUser(user);
 		redirectAttributes.addFlashAttribute("message", "更新用户" + user.getLoginName() + "成功");
 		return "redirect:/admin/user";

@@ -1,34 +1,27 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 /*******************************************************************************
  * Copyright (c) 2005, 2014 springside.github.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package ${package}.service.account;
+package org.springcat.sample.service.account;
 
-import java.io.Serializable;
-
-import javax.annotation.PostConstruct;
-
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import ${package}.entity.User;
+import org.springcat.sample.entity.User;
 import org.springside.modules.utils.Encodes;
 
-import com.google.common.base.Objects;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
 
 public class ShiroDbRealm extends AuthorizingRealm {
+
 
 	protected AccountService accountService;
 
@@ -56,7 +49,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
 		User user = accountService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(user.getRoleList());
+		String[] roles = user.getRoles().split(",");
+		info.addRoles(Lists.newArrayList(roles));
 		return info;
 	}
 

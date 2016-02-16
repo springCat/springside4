@@ -1,36 +1,28 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 /*******************************************************************************
  * Copyright (c) 2005, 2014 springside.github.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package ${package}.web.task;
+package org.springcat.sample.web.task;
 
-import java.util.Map;
+import com.google.common.collect.Maps;
+import org.apache.shiro.SecurityUtils;
+import org.springcat.sample.entity.Task;
+import org.springcat.sample.entity.TaskExt;
+import org.springcat.sample.entity.User;
+import org.springcat.sample.service.account.ShiroDbRealm.ShiroUser;
+import org.springcat.sample.service.task.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springside.modules.web.Servlets;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
-
-import org.apache.shiro.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ${package}.entity.Task;
-import ${package}.entity.User;
-import ${package}.service.account.ShiroDbRealm.ShiroUser;
-import ${package}.service.task.TaskService;
-import org.springside.modules.web.Servlets;
-
-import com.google.common.collect.Maps;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Task管理的Controller, 使用Restful风格的Urls:
@@ -67,7 +59,7 @@ public class TaskController {
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		Long userId = getCurrentUserId();
 
-		Page<Task> tasks = taskService.getUserTask(userId, searchParams, pageNumber, pageSize, sortType);
+		List<Task> tasks = taskService.getUserTask(userId, searchParams, pageNumber, pageSize, sortType);
 
 		model.addAttribute("tasks", tasks);
 		model.addAttribute("sortType", sortType);
@@ -86,8 +78,9 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid Task newTask, RedirectAttributes redirectAttributes) {
-		User user = new User(getCurrentUserId());
+	public String create(@Valid TaskExt newTask, RedirectAttributes redirectAttributes) {
+		User user = new User();
+		user.setId(getCurrentUserId());
 		newTask.setUser(user);
 
 		taskService.saveTask(newTask);

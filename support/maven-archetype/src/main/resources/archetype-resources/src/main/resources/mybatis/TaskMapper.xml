@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.springcat.sample.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="org.springcat.sample.entity.User" >
+<mapper namespace="org.springcat.sample.dao.TaskMapper" >
+  <resultMap id="BaseResultMap" type="org.springcat.sample.entity.Task" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="salt" property="salt" jdbcType="VARCHAR" />
-    <result column="roles" property="roles" jdbcType="VARCHAR" />
-    <result column="register_date" property="registerDate" jdbcType="TIMESTAMP" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, login_name, name, password, salt, roles, register_date
+    id, title, description, user_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.UserCondition" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.TaskCondition" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tuser
+    from ttask
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,105 +85,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tuser
+    from ttask
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tuser
+    delete from ttask
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.springcat.sample.entity.UserCondition" >
-    delete from tuser
+  <delete id="deleteByExample" parameterType="org.springcat.sample.entity.TaskCondition" >
+    delete from ttask
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.springcat.sample.entity.User" >
+  <insert id="insert" parameterType="org.springcat.sample.entity.Task" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tuser (login_name, name, password, 
-      salt, roles, register_date
+    insert into ttask (title, description, user_id
       )
-    values (#{loginName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, #{registerDate,jdbcType=TIMESTAMP}
+    values (#{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.springcat.sample.entity.User" >
+  <insert id="insertSelective" parameterType="org.springcat.sample.entity.Task" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tuser
+    insert into ttask
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="loginName != null" >
-        login_name,
+      <if test="title != null" >
+        title,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="description != null" >
+        description,
       </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="salt != null" >
-        salt,
-      </if>
-      <if test="roles != null" >
-        roles,
-      </if>
-      <if test="registerDate != null" >
-        register_date,
+      <if test="userId != null" >
+        user_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="loginName != null" >
-        #{loginName,jdbcType=VARCHAR},
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null" >
-        #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="roles != null" >
-        #{roles,jdbcType=VARCHAR},
-      </if>
-      <if test="registerDate != null" >
-        #{registerDate,jdbcType=TIMESTAMP},
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.springcat.sample.entity.UserCondition" resultType="java.lang.Integer" >
-    select count(*) from tuser
+  <select id="countByExample" parameterType="org.springcat.sample.entity.TaskCondition" resultType="java.lang.Integer" >
+    select count(*) from ttask
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tuser
+    update ttask
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.loginName != null" >
-        login_name = #{record.loginName,jdbcType=VARCHAR},
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.salt != null" >
-        salt = #{record.salt,jdbcType=VARCHAR},
-      </if>
-      <if test="record.roles != null" >
-        roles = #{record.roles,jdbcType=VARCHAR},
-      </if>
-      <if test="record.registerDate != null" >
-        register_date = #{record.registerDate,jdbcType=TIMESTAMP},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -194,59 +162,44 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tuser
+    update ttask
     set id = #{record.id,jdbcType=BIGINT},
-      login_name = #{record.loginName,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR},
-      roles = #{record.roles,jdbcType=VARCHAR},
-      register_date = #{record.registerDate,jdbcType=TIMESTAMP}
+      title = #{record.title,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.springcat.sample.entity.User" >
-    update tuser
+  <update id="updateByPrimaryKeySelective" parameterType="org.springcat.sample.entity.Task" >
+    update ttask
     <set >
-      <if test="loginName != null" >
-        login_name = #{loginName,jdbcType=VARCHAR},
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null" >
-        salt = #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="roles != null" >
-        roles = #{roles,jdbcType=VARCHAR},
-      </if>
-      <if test="registerDate != null" >
-        register_date = #{registerDate,jdbcType=TIMESTAMP},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.springcat.sample.entity.User" >
-    update tuser
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      roles = #{roles,jdbcType=VARCHAR},
-      register_date = #{registerDate,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="org.springcat.sample.entity.Task" >
+    update ttask
+    set title = #{title,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.UserCondition" id="selectByExampleWithRowbounds" >
+  <select resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.TaskCondition" id="selectByExampleWithRowbounds" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tuser
+    from ttask
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

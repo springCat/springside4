@@ -1,4 +1,4 @@
-package org.springside.modules.mybatis.enums;
+package org.springside.modules.mybatis.handler.enums;
 
 /**
  * 枚举类工具集

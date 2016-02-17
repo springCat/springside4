@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springcat.sample.entity.UserExt;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(value = "/muser")
@@ -35,6 +37,11 @@ public class MyBatisUserController {
 	@RequestMapping(value = "tx", method = RequestMethod.GET)
 	public User tx()  {
 		User user = mybatisService.testTx();
+		return user;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public UserExt show(@RequestBody UserExt user){
 		return user;
 	}
 

@@ -4,6 +4,7 @@
 package ${package}.entity;
 
 import ${package}.entity.base.User;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by springcat on 16/2/15.
@@ -11,6 +12,7 @@ import ${package}.entity.base.User;
 
 public class UserExt extends User {
 
+    @NotNull
     private String plainPassword;
 
     public String getPlainPassword() {
@@ -20,4 +22,17 @@ public class UserExt extends User {
     public void setPlainPassword(String plainPassword) {
         this.plainPassword = plainPassword;
     }
+
+    private String name;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

@@ -12,13 +12,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import ${package}.dao.base.UserMapper;
 import ${package}.entity.base.User;
+import ${package}.rest.RestException;
 import ${package}.entity.UserExt;
 import ${package}.service.MybatisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -44,8 +44,19 @@ public class MyBatisUserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public UserExt show(@RequestBody UserExt user){
+	public UserExt show(@RequestBody @Valid UserExt user){
 		return user;
+	}
+
+	@RequestMapping(value = "para",method = RequestMethod.POST)
+	public String para(@RequestParam int name){
+		return "ok";
+	}
+
+	@RequestMapping(value = "exception",method = RequestMethod.POST)
+	public String exception(){
+		throw new RestException(HttpStatus.BAD_GATEWAY,"11");
+
 	}
 
 	@RequestMapping(value = "/page",method = RequestMethod.POST)

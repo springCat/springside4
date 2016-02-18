@@ -25,6 +25,8 @@ public class MybatisService {
         user.setId(null);
         user.setLoginName(RandomUtils.nextInt(1,100)+"");
         userMapper.insertSelective(user);
-        throw new ServiceException("1111");
+//        throw new ServiceException("1111");
+        return user;
+
     }
 }

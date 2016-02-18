@@ -33,7 +33,7 @@
 				</property>
 
 				<!--<property name="objectMapper">-->
-					<!--<bean class="${package}.rest.ObjectMapper"></bean>-->
+					<!--<bean class="${package}.rest.NullObjectMapper"></bean>-->
 				<!--</property>-->
             </bean>
   		</mvc:message-converters>

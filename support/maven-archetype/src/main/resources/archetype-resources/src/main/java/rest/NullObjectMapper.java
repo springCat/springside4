@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
-public class ObjectMapper extends ObjectMapper
+public class NullObjectMapper extends ObjectMapper
 {
 
     public ObjectMapper()

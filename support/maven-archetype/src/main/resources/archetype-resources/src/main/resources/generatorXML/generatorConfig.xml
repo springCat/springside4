@@ -15,14 +15,21 @@
 
         <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
 
-          <!--<plugin type="org.springside.modules.mybatis.generator.plugin.MysqlPaginationPluginExt" />-->
+        <!--<plugin type="org.springside.modules.mybatis.generator.plugin.MysqlPaginationPluginExt" />-->
 
-          <plugin type="org.springside.modules.mybatis.generator.plugin.RenameExampleClassAndMethodsPlugin" >
-              <property name="classMethodSearchString" value="Example" />
-              <property name="classMethodReplaceString" value="Condition" />
-              <property name="parameterSearchString" value="example" />
-              <property name="parameterReplaceString" value="condition" />
-          </plugin>
+        <plugin type="org.springside.modules.mybatis.generator.plugin.RenameExampleClassAndMethodsPlugin" >
+          <property name="classMethodSearchString" value="Example" />
+          <property name="classMethodReplaceString" value="Condition" />
+          <property name="parameterSearchString" value="example" />
+          <property name="parameterReplaceString" value="condition" />
+        </plugin>
+
+        <!--<plugin type="org.mybatis.generator.plugins.CachePlugin" >-->
+        <!--<property name="cache_eviction" value="LRU"/>-->
+        <!--<property name="cache_flushInterval" value="60000"/>-->
+        <!--<property name="cache_readOnly" value="false"/>-->
+        <!--<property name="cache_size" value="1024"/>-->
+        <!--</plugin>-->
 
         <commentGenerator>
             <property name="suppressAllComments" value="true" />

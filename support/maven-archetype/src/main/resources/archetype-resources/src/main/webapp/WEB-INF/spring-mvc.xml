@@ -25,7 +25,17 @@
 			<!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="prettyPrint" value="true"/>
-            </bean>			
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+
+				<!--<property name="objectMapper">-->
+					<!--<bean class="${package}.rest.ObjectMapper"></bean>-->
+				<!--</property>-->
+            </bean>
   		</mvc:message-converters>
 	</mvc:annotation-driven>
 	

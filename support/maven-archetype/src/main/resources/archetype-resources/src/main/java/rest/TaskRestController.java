@@ -10,8 +10,8 @@ package ${package}.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springcat.sample.entity.Task;
-import org.springcat.sample.service.task.TaskService;
+import ${package}.entity.base.Task;
+import ${package}.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

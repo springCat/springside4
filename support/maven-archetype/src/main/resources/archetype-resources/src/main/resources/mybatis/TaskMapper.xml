@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.springcat.sample.dao.TaskMapper" >
-  <resultMap id="BaseResultMap" type="org.springcat.sample.entity.Task" >
+<mapper namespace="${package}.dao.base.TaskMapper" >
+  <resultMap id="BaseResultMap" type="${package}.entity.base.Task" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, title, description, user_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.TaskCondition" >
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="${package}.entity.base.TaskCondition" >
     select
     <if test="distinct" >
       distinct
@@ -83,7 +83,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from ttask
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
@@ -92,13 +92,13 @@
     delete from ttask
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.springcat.sample.entity.TaskCondition" >
+  <delete id="deleteByCondition" parameterType="${package}.entity.base.TaskCondition" >
     delete from ttask
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.springcat.sample.entity.Task" >
+  <insert id="insert" parameterType="${package}.entity.base.Task" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -107,7 +107,7 @@
     values (${symbol_pound}{title,jdbcType=VARCHAR}, ${symbol_pound}{description,jdbcType=VARCHAR}, ${symbol_pound}{userId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.springcat.sample.entity.Task" >
+  <insert id="insertSelective" parameterType="${package}.entity.base.Task" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -135,17 +135,17 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.springcat.sample.entity.TaskCondition" resultType="java.lang.Integer" >
+  <select id="countByCondition" parameterType="${package}.entity.base.TaskCondition" resultType="java.lang.Integer" >
     select count(*) from ttask
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByConditionSelective" parameterType="map" >
     update ttask
     <set >
       <if test="record.id != null" >
-        id = ${symbol_pound}{record.id,jdbcType=BIGINT},
+        
       </if>
       <if test="record.title != null" >
         title = ${symbol_pound}{record.title,jdbcType=VARCHAR},
@@ -161,9 +161,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByCondition" parameterType="map" >
     update ttask
-    set id = ${symbol_pound}{record.id,jdbcType=BIGINT},
+    set 
       title = ${symbol_pound}{record.title,jdbcType=VARCHAR},
       description = ${symbol_pound}{record.description,jdbcType=VARCHAR},
       user_id = ${symbol_pound}{record.userId,jdbcType=BIGINT}
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.springcat.sample.entity.Task" >
+  <update id="updateByPrimaryKeySelective" parameterType="${package}.entity.base.Task" >
     update ttask
     <set >
       <if test="title != null" >
@@ -186,25 +186,11 @@
     </set>
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.springcat.sample.entity.Task" >
+  <update id="updateByPrimaryKey" parameterType="${package}.entity.base.Task" >
     update ttask
     set title = ${symbol_pound}{title,jdbcType=VARCHAR},
       description = ${symbol_pound}{description,jdbcType=VARCHAR},
       user_id = ${symbol_pound}{userId,jdbcType=BIGINT}
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
-  <select resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.TaskCondition" id="selectByExampleWithRowbounds" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from ttask
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${symbol_dollar}{orderByClause}
-    </if>
-  </select>
 </mapper>

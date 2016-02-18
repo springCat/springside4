@@ -9,9 +9,9 @@
 package ${package}.web.account;
 
 import org.apache.shiro.SecurityUtils;
-import org.springcat.sample.entity.UserExt;
-import org.springcat.sample.service.account.AccountService;
-import org.springcat.sample.service.account.ShiroDbRealm.ShiroUser;
+import ${package}.entity.UserExt;
+import ${package}.service.account.AccountService;
+import ${package}.service.account.ShiroDbRealm.ShiroUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

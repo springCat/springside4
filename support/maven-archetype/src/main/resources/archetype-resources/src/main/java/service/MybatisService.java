@@ -4,8 +4,8 @@
 package ${package}.service;
 
 import org.apache.commons.lang3.RandomUtils;
-import org.springcat.sample.dao.UserMapper;
-import org.springcat.sample.entity.User;
+import ${package}.dao.base.UserMapper;
+import ${package}.entity.base.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

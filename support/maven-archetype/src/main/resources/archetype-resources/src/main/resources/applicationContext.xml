@@ -33,6 +33,19 @@
 		<property   name="typeAliasesPackage"   value="${package}.entity" />
 		<!-- 显式指定Mapper文件位置 -->
 		<property   name="mapperLocations"  value="classpath:/mybatis/*Mapper.xml" />
+
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=hsqldb
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+
 	</bean>
 
 	<!-- 扫描basePackage下所有以@MyBatisRepository标识的接口-->

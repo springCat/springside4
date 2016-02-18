@@ -3,16 +3,9 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 
-    <classPathEntry
-            location="src/test/resources/generator/driver/mysql-connector-java-5.1.38.jar" />
-    <context id="MysqlTables" targetRuntime="MyBatis3">
+      <context id="MysqlTables" targetRuntime="MyBatis3">
 
         <property name="suppressTypeWarnings" value="true" />
-
-        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
-            <property name="searchString" value="Example$"/>
-            <property name="replaceString" value="Condition"/>
-        </plugin>
 
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
 
@@ -20,7 +13,16 @@
 
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 
-        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+        <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
+
+          <!--<plugin type="org.springside.modules.mybatis.generator.plugin.MysqlPaginationPluginExt" />-->
+
+          <plugin type="org.springside.modules.mybatis.generator.plugin.RenameExampleClassAndMethodsPlugin" >
+              <property name="classMethodSearchString" value="Example" />
+              <property name="classMethodReplaceString" value="Condition" />
+              <property name="parameterSearchString" value="example" />
+              <property name="parameterReplaceString" value="condition" />
+          </plugin>
 
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
@@ -34,7 +36,7 @@
             <property name="" value=""/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="${package}.entity" targetProject="src/main/java" >
+        <javaModelGenerator targetPackage="${package}.entity.base" targetProject="src/main/java" >
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -43,7 +45,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="${package}.dao" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${package}.dao.base" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
@@ -87,7 +89,7 @@
             <!--<columnOverride column="register_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
         <!--</table>-->
 
-        <table tableName="tuser" domainObjectName="TUser">
+        <table tableName="tuser" domainObjectName="User">
             <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
             <!--<columnOverride column="id"/>-->
             <!--<columnOverride column="login_name" />-->
@@ -97,12 +99,18 @@
             <!--<columnOverride column="roles"/>-->
             <!--<columnOverride column="register_date" />-->
 
-            <ignoreColumn column="roles"/>
-            <ignoreColumn column="salt"/>
+            <!--<ignoreColumn column="roles"/>-->
+            <!--<ignoreColumn column="salt"/>-->
 
         </table>
 
-    </context>
+          <table tableName="ttask" domainObjectName="Task">
+              <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+
+          </table>
+
+
+      </context>
 
 
 </generatorConfiguration>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.springcat.sample.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="org.springcat.sample.entity.User" >
+<mapper namespace="${package}.dao.base.UserMapper" >
+  <resultMap id="BaseResultMap" type="${package}.entity.base.User" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="login_name" property="loginName" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List" >
     id, login_name, name, password, salt, roles, register_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.UserCondition" >
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="${package}.entity.base.UserCondition" >
     select
     <if test="distinct" >
       distinct
@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from tuser
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
@@ -95,24 +95,24 @@
     delete from tuser
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.springcat.sample.entity.UserCondition" >
+  <delete id="deleteByCondition" parameterType="${package}.entity.base.UserCondition" >
     delete from tuser
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.springcat.sample.entity.User" >
+  <insert id="insert" parameterType="${package}.entity.base.User" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tuser (login_name, name, password,
+    insert into tuser (login_name, name, password, 
       salt, roles, register_date
       )
-    values (${symbol_pound}{loginName,jdbcType=VARCHAR}, ${symbol_pound}{name,jdbcType=VARCHAR}, ${symbol_pound}{password,jdbcType=VARCHAR},
+    values (${symbol_pound}{loginName,jdbcType=VARCHAR}, ${symbol_pound}{name,jdbcType=VARCHAR}, ${symbol_pound}{password,jdbcType=VARCHAR}, 
       ${symbol_pound}{salt,jdbcType=VARCHAR}, ${symbol_pound}{roles,jdbcType=VARCHAR}, ${symbol_pound}{registerDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.springcat.sample.entity.User" >
+  <insert id="insertSelective" parameterType="${package}.entity.base.User" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -158,17 +158,17 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.springcat.sample.entity.UserCondition" resultType="java.lang.Integer" >
+  <select id="countByCondition" parameterType="${package}.entity.base.UserCondition" resultType="java.lang.Integer" >
     select count(*) from tuser
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByConditionSelective" parameterType="map" >
     update tuser
     <set >
       <if test="record.id != null" >
-        id = ${symbol_pound}{record.id,jdbcType=BIGINT},
+        
       </if>
       <if test="record.loginName != null" >
         login_name = ${symbol_pound}{record.loginName,jdbcType=VARCHAR},
@@ -193,9 +193,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByCondition" parameterType="map" >
     update tuser
-    set id = ${symbol_pound}{record.id,jdbcType=BIGINT},
+    set 
       login_name = ${symbol_pound}{record.loginName,jdbcType=VARCHAR},
       name = ${symbol_pound}{record.name,jdbcType=VARCHAR},
       password = ${symbol_pound}{record.password,jdbcType=VARCHAR},
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.springcat.sample.entity.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="${package}.entity.base.User" >
     update tuser
     <set >
       <if test="loginName != null" >
@@ -230,7 +230,7 @@
     </set>
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.springcat.sample.entity.User" >
+  <update id="updateByPrimaryKey" parameterType="${package}.entity.base.User" >
     update tuser
     set login_name = ${symbol_pound}{loginName,jdbcType=VARCHAR},
       name = ${symbol_pound}{name,jdbcType=VARCHAR},
@@ -240,18 +240,4 @@
       register_date = ${symbol_pound}{registerDate,jdbcType=TIMESTAMP}
     where id = ${symbol_pound}{id,jdbcType=BIGINT}
   </update>
-  <select resultMap="BaseResultMap" parameterType="org.springcat.sample.entity.UserCondition" id="selectByExampleWithRowbounds" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tuser
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${symbol_dollar}{orderByClause}
-    </if>
-  </select>
 </mapper>

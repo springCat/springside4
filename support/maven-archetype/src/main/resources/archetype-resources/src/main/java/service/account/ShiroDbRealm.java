@@ -17,7 +17,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springcat.sample.entity.User;
+import ${package}.entity.base.User;
 import org.springside.modules.utils.Encodes;
 
 import javax.annotation.PostConstruct;

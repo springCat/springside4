@@ -8,9 +8,9 @@
  *******************************************************************************/
 package ${package}.service.task;
 
-import org.springcat.sample.dao.TaskMapper;
-import org.springcat.sample.entity.Task;
-import org.springcat.sample.entity.TaskCondition;
+import ${package}.dao.base.TaskMapper;
+import ${package}.entity.base.Task;
+import ${package}.entity.base.TaskCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +38,7 @@ public class TaskService {
 	}
 
 	public List<Task> getAllTask() {
-		return taskMapper.selectByExample(null);
+		return taskMapper.selectByCondition(null);
 	}
 
 	public List<Task> getUserTask(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
@@ -53,7 +53,7 @@ public class TaskService {
 		}
 		taskCondition.createCriteria().andUserIdEqualTo(userId);
 
-		return taskMapper.selectByExample(taskCondition).subList((pageNumber-1)*pageSize,pageNumber*pageSize);
+		return taskMapper.selectByCondition(taskCondition).subList((pageNumber-1)*pageSize,pageNumber*pageSize);
 	}
 
 	/**

@@ -10,11 +10,11 @@ package ${package}.web.task;
 
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;
-import org.springcat.sample.entity.Task;
-import org.springcat.sample.entity.TaskExt;
-import org.springcat.sample.entity.User;
-import org.springcat.sample.service.account.ShiroDbRealm.ShiroUser;
-import org.springcat.sample.service.task.TaskService;
+import ${package}.entity.base.Task;
+import ${package}.entity.TaskExt;
+import ${package}.entity.base.User;
+import ${package}.service.account.ShiroDbRealm.ShiroUser;
+import ${package}.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

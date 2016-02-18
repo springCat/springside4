@@ -12,14 +12,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springcat.sample.dao.TaskMapper;
-import org.springcat.sample.dao.UserMapper;
-import org.springcat.sample.entity.TaskCondition;
-import org.springcat.sample.entity.User;
-import org.springcat.sample.entity.UserCondition;
-import org.springcat.sample.entity.UserExt;
-import org.springcat.sample.service.ServiceException;
-import org.springcat.sample.service.account.ShiroDbRealm.ShiroUser;
+import ${package}.dao.base.TaskMapper;
+import ${package}.dao.base.UserMapper;
+import ${package}.entity.base.TaskCondition;
+import ${package}.entity.base.User;
+import ${package}.entity.base.UserCondition;
+import ${package}.entity.UserExt;
+import ${package}.service.ServiceException;
+import ${package}.service.account.ShiroDbRealm.ShiroUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -54,7 +54,8 @@ public class AccountService {
 	private Clock clock = Clock.DEFAULT;
 
 	public List<User> getAllUser() {
-		return (List<User>) userMapper.selectByExample(null);
+		return (List<User>) userMapper.selectByCondition(null);
+
 	}
 
 	public User getUser(Long id) {
@@ -65,7 +66,7 @@ public class AccountService {
 		UserCondition userCondition = new UserCondition();
 		userCondition.createCriteria().andLoginNameEqualTo(loginName);
 
-		return userMapper.selectByExample(userCondition).get(0);
+		return userMapper.selectByCondition(userCondition).get(0);
 	}
 
 	public void registerUser(UserExt user) {
@@ -91,7 +92,7 @@ public class AccountService {
 		userMapper.deleteByPrimaryKey(id);
 		TaskCondition taskCondition = new TaskCondition();
 		taskCondition.createCriteria().andUserIdEqualTo(id);
-		taskMapper.deleteByExample(taskCondition);
+		taskMapper.deleteByCondition(taskCondition);
 
 	}
 

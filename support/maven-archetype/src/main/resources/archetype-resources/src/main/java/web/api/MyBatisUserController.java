@@ -8,15 +8,18 @@
  *******************************************************************************/
 package ${package}.web.api;
 
-import org.springcat.sample.dao.UserMapper;
-import org.springcat.sample.entity.User;
-import org.springcat.sample.service.MybatisService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import ${package}.dao.base.UserMapper;
+import ${package}.entity.base.User;
+import ${package}.entity.UserExt;
+import ${package}.service.MybatisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springcat.sample.entity.UserExt;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/muser")
@@ -45,4 +48,15 @@ public class MyBatisUserController {
 		return user;
 	}
 
+	@RequestMapping(value = "/page",method = RequestMethod.POST)
+	public PageInfo page(){
+
+		PageHelper.startPage(1, 10);
+		PageHelper.orderBy("login_name desc");
+		List<User> list = userMapper.selectByCondition(null);
+
+		PageInfo page = new PageInfo(list);
+
+		return page;
+	}
 }

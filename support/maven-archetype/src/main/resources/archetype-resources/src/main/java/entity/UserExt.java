@@ -3,10 +3,13 @@
 #set( $symbol_escape = '\' )
 package ${package}.entity;
 
+import ${package}.entity.base.User;
+
 /**
  * Created by springcat on 16/2/15.
  */
-public class UserExt extends User{
+
+public class UserExt extends User {
 
     private String plainPassword;
 

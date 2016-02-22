@@ -18,7 +18,7 @@ import ${package}.entity.base.TaskCondition;
 import ${package}.entity.base.User;
 import ${package}.entity.base.UserCondition;
 import ${package}.entity.UserExt;
-import ${package}.service.ServiceException;
+import ${package}.exception.ServiceException;
 import ${package}.service.account.ShiroDbRealm.ShiroUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;

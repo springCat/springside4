@@ -10,7 +10,7 @@ import java.io.IOException;
 public class NullObjectMapper extends ObjectMapper
 {
 
-    public ObjectMapper()
+    public NullObjectMapper()
     {
         super();
 

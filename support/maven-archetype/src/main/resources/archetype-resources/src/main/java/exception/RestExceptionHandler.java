@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package ${package}.rest;
+package ${package}.exception;
 
 import com.google.common.collect.Maps;
 import org.springframework.beans.TypeMismatchException;
@@ -103,6 +103,31 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		String json = jsonMapper.toJson(map);
 		headers.setContentType(MediaType.parseMediaType(MediaTypes.TEXT_PLAIN_UTF_8));
 		return handleExceptionInternal(ex, json, headers, HttpStatus.BAD_REQUEST, request);
+	}
+
+	/**
+	 * 处理ServiceException.
+	 */
+	@ExceptionHandler(value = { ServiceException.class })
+	public final ResponseEntity<?> handleException(ServiceException ex, WebRequest request) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.parseMediaType(MediaTypes.TEXT_PLAIN_UTF_8));
+		return handleExceptionInternal(ex, ex.getMessage(), headers, HttpStatus.INTERNAL_SERVER_ERROR, request);
+	}
+
+	/**
+	 * 处理FailedException.
+	 */
+	@ExceptionHandler(value = { FailedException.class })
+	public final ResponseEntity<?> handleException(FailedException ex, WebRequest request) {
+
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("errcode",ex.getCode());
+		map.put("errmsg",ex.getMsg());
+		String json = jsonMapper.toJson(map);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.parseMediaType(MediaTypes.TEXT_PLAIN_UTF_8));
+		return handleExceptionInternal(ex, json, headers, HttpStatus.OK, request);
 	}
 
 }

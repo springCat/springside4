@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package ${package}.service;
+package ${package}.exception;
 
 /**
  * Service层公用的Exception.

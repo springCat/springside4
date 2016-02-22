@@ -3,9 +3,9 @@
 #set( $symbol_escape = '\' )
 package ${package}.service;
 
-import org.apache.commons.lang3.RandomUtils;
 import ${package}.dao.base.UserMapper;
 import ${package}.entity.base.User;
+import ${package}.exception.FailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +23,10 @@ public class MybatisService {
     public User testTx(){
         User user = userMapper.selectByPrimaryKey(1L);
         user.setId(null);
-        user.setLoginName(RandomUtils.nextInt(1,100)+"");
+//        user.setLoginName(RandomUtils.nextInt(1,100)+"");
         userMapper.insertSelective(user);
-//        throw new ServiceException("1111");
-        return user;
+        throw new FailedException(1,"1111");
+//        return user;
 
     }
 }

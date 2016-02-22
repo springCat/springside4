@@ -12,7 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import ${package}.dao.base.UserMapper;
 import ${package}.entity.base.User;
-import ${package}.rest.RestException;
+import ${package}.exception.RestException;
 import ${package}.entity.UserExt;
 import ${package}.service.MybatisService;
 import org.springframework.beans.factory.annotation.Autowired;
